@@ -1,0 +1,199 @@
+
+{{ block title }}
+How Well Did You Understand the Study Instructions?
+{{ endblock }}
+{{ block content }}
+<script>
+    window.onload = function() {
+    document.title = "SCU2022";
+        }
+</script>
+<p>Below is a summary of the answers you provided for each of the comprehension questions. For each, the correct answer
+    is also provided. Please take a moment to review this information before proceeding to the next screen. If you have
+    any remaining questions, please raise your hand and an experimenter will come speak with you privately to provide
+    clarification.</p>
+
+<br/><br/>
+
+<b>1.</b> In round 4, assume that a Seller offers a product for sale at a price of 125 points and a Buyer buys the product.
+
+<br/><br/>
+
+
+<b>Q1a:</b> How many points would the Seller earn for the task if round 4 was selected as the payment round?
+
+{{if player.Q1a != 125}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q1a}} the correct answer was 125
+
+<br><br>
+<br><br>
+
+<b>Q1b:</b> How many points would the Seller earn for the task if round 4 was selected as the payment round?
+
+{{if player.Q1b != 125}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q1b}} the correct answer was 125
+
+<br><br>
+<br><br>
+
+<b>Q1c:</b> How many points would the Bystander earn for the task if round 4 was selected as the payment round?
+
+
+{{if player.Q1c != 50}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q1c}}. The correct answer was 50.
+
+<br><br>
+<br><br>
+
+<b>Q2:</b> In round 8, assume that a Seller offers a product for sale at a price of 25 points and no Buyer buys the product a. How many points would the Seller earn for the task if round 8 was selected as the payment round?
+
+{{if player.Q2a != 100}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q2a}}. The correct answer was 100.
+
+<br><br>
+<br><br>
+
+<b>Q3:</b> How many points does each participant earn for completing the study?
+
+{{if player.Q3 != 50}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q3}}. The correct answer was 50.
+
+<br><br>
+<br><br>
+
+<b>Q4:</b> There are more Buyers than Sellers in this session (True or False)?
+
+{{if player.Q4 != False}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q4}}. The correct answer was False
+
+<br><br>
+<br><br>
+
+<b>Q5:</b> There are the same number of Bystanders and Sellers in this session (True or False)?
+
+{{if player.Q5 != False}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q5}}. The correct answer was False
+
+<br><br>
+<br><br>
+
+<b>Q6:</b> Each Bystander is randomly paired with a Buyer in each round (True or False)?
+
+{{if player.Q6 != False}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q6}}. The correct answer was False.
+
+<br><br>
+<br><br>
+
+<b>Q7:</b> The payment round will be determined randomly by the computer (True or False)?
+
+{{if player.Q7 != True}}
+❌
+{{else}}
+✓
+{{endif}}
+
+<br><br>
+
+You answered {{player.Q7}}. The correct answer was True.
+
+<br><br>
+<br><br>
+
+<b>Q8: </b>
+{{if player.treatment == 0}}
+The instructions state that the Bystander does not make any decisions (True or False)?
+{{if player.Q80 != True}}
+❌
+{{else}}
+✓
+{{endif}}
+<br><br>
+You answered {{player.Q80}}. The correct answer was True.
+
+{{endif}}
+
+{{if player.treatment == 1}}
+The instructions state that each time a Buyer buys a product, a Bystander’s payment is reduced by 50 points (True or False)?
+{{if player.Q81 != True}}
+❌
+{{else}}
+✓
+{{endif}}
+You answered {{player.Q81}}. The correct answer was True.
+
+{{endif}}
+
+{{if player.treatment == 2}}
+The instructions state that the Buyer and Seller profit at the expense of the Bystander (True or False)?
+{{if player.Q82 != True}}
+❌
+{{else}}
+✓
+{{endif}}
+You answered {{player.Q82}}. The correct answer was True.
+
+{{endif}}
+
+<br><br>
+<br><br>
+
+{{ next_button }}
+
+{{ endblock }}

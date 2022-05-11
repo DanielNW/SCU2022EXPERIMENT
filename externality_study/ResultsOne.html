@@ -1,0 +1,55 @@
+
+{{ block title }}Results{{ endblock }}
+{{ block content }}
+<script>
+    window.onload = function() {
+    document.title = "SCU2022";
+        }
+</script>
+You earned {{  player.pay }} points this round.
+{{if player.round_number == 1}}
+Remember, this was a practice round. One of the next 12 rounds will be selected at random to be the payment round.
+{{else}}
+If this round is selected as the payment round, these points will be added to the points you earn for completing the study and the points you earned for each correctly answered comprehension question to determine your total payment.
+{{endif}}
+
+<br /> <br />
+
+The table below lists the prices of the products offered for sale, and whether those products were sold. If no products are listed, no products were offered for sale. After reviewing the table, please press next to continue.
+
+<br>
+
+<table id="history" class="table">
+    <tr>
+        <th>Price</th>
+        <th>Sold</th>
+    </tr>
+    {{ for p in player.subsession.get_players() }}
+    {{ if p.role == "Seller" }}
+    {{ if p.offer > 0 }}
+    {{if p == player }}
+    <tr style="color:rgb(0%,0%,100%);">
+        <th> {{p.offerPrice}} </th>
+        {{if p.isoffertaken == 1}}
+        <th> Yes </th>
+        {{else}}
+        <th> No </th>
+        {{endif}}
+    </tr>
+    {{else}}
+        <th> {{p.offerPrice}} </th>
+        {{if p.isoffertaken == 1}}
+        <th> Yes </th>
+        {{else}}
+        <th> No </th>
+        {{endif}}
+    </tr>
+    {{endif}}
+    {{endif}}
+    {{endif}}
+    {{endfor}}
+</table>
+
+<p></p>
+
+{{ next_button }} {{ endblock }}

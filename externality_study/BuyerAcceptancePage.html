@@ -1,0 +1,166 @@
+
+{{ block content }}
+<script>
+    window.onload = function() {
+    document.title = "SCU2022";
+        }
+</script>
+{% if player.subsession.bnum <= player.subsession.numbuyers %}
+
+{% if player.role == 'Buyer' %}
+<table id="history" class="table">
+    Buyer #{{player.subsession.bnum}} is taking their turn. You are Buyer #{{player.BuyerNumber}}.
+    <br><br>
+    <br><br>
+      <b>Products offered For Sale:</b>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Available</th>
+        {% if player.BuyerNumber == player.subsession.bnum%}
+        <th>Buy Product</th>
+        {{else}}
+        <th> </th>
+        {{endif}}
+    </tr>
+    {{ for p in player.subsession.get_players() }}
+
+    {{if p.role == "Seller"}}
+    {{if p.offer > 0}}
+    <tr>
+        {% if player.BuyerNumber == player.subsession.bnum%}
+            <th>{{forloop.counter}}</th>
+            <th> {{p.offerPrice}} </th>
+            {{if p.isoffertaken == 1}}
+            <th> No </th>
+            <th> </th>
+            {{else}}
+            <th> Yes </th>
+            <th> <button type="button" onclick="sendValue({{p.OfferNum}})">Buy this Product for {{p.offerPrice}}</button> </th>
+            {{endif}}
+        {% else %}
+            <th>{{forloop.counter}}</th>
+            <th> {{p.offerPrice}} </th>
+            {{if p.isoffertaken == 1}}
+            <th> No </th>
+            {{else}}
+            <th> Yes </th>
+            {{endif}}
+        {% endif %}
+    </tr>
+    {{endif}}
+    {{endif}}
+    {{endfor}}
+</table>
+
+<br/><br/>
+{% if player.BuyerNumber == player.subsession.bnum%}
+
+<button type="button" onclick="sendValue(999)">Do not buy a product</button>
+
+<br><br>
+
+If there are no products available, please press the "Do not buy a product" button to continue.
+
+{{if player.BuyerNumber < player.subsession.bnum}}
+You have made your selection. You may press Next now or wait for the other buyers to make their selection.
+<br>
+<br>
+{{ next_button }}
+{{endif}}
+
+{% else %}
+{% endif %}
+{% else %}
+{% if player.role == 'Seller' %}
+The table below lists all the products offered for sale during this round. If you offered a product for sale, your product appears in blue. Buyers are currently evaluating these offers. Please wait until all Buyers have made their choices.
+<br/> </br>
+<table id="history" class="table">
+      <b>Products Offered For Sale:</b>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Available</th>
+    </tr>
+    {{ for p in player.subsession.get_players() }}
+    {{ if p.role == "Seller" }}
+    {{ if p.offer > 0 }}
+    {{if p == player }}
+    <tr style="color:rgb(0%,0%,100%);">
+        <th>{{forloop.counter}}</th>
+        <th> {{p.offerPrice}} </th>
+        {{if p.isoffertaken == 1}}
+        <th> No </th>
+        {{else}}
+        <th> Yes </th>
+        {{endif}}
+    </tr>
+    {{else}}
+        <th>{{forloop.counter}}</th>
+        <th> {{p.offerPrice}} </th>
+        {{if p.isoffertaken == 1}}
+        <th> No </th>
+        {{else}}
+        <th> Yes </th>
+        {{endif}}
+    </tr>
+    {{endif}}
+    {{endif}}
+    {{endif}}
+    {{endfor}}
+                        </table>
+{% else %} <!--end seller if -->
+<label>The Buyers are currently evaluating products offered for sale in this round. </label>
+<label> Press Next to continue or wait for the buyers to make their selection. </label>
+<br/><br/>
+{{ next_button }}
+{% endif %}
+
+{% endif %} <!--end buyer else -->
+
+{%else%}
+
+Buyers have finished. Press Next to continue now.
+
+<br/><br/>
+
+{{next_button}}
+
+{% endif %}
+
+<br/>
+<script>
+
+    let newsEle = document.getElementById('news');
+    let current_number = document.getElementById('current_number');
+
+    function liveRecv(data) {
+        console.log('liveRecv', data)
+        if (data.game_over) {
+            document.getElementById('form').submit();
+        }
+    }
+
+    function sendValue(num) {
+        liveSend(parseInt(num));
+        console.log('sent', num);
+        history.go()
+        //window.location.reload();
+    }
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        console.log('sent', num);
+    });
+</script>
+
+<script>
+    function timedRefresh(timeoutPeriod) {
+        setTimeout("location.reload(true);",timeoutPeriod);
+}
+    if ({{player.BuyerNumber}} != {{player.subsession.bnum}}){
+        window.onload = timedRefresh(3000); //forces regular reloads, may cause issues, needs testing
+    }
+</script>
+
+
+{{ endblock}}

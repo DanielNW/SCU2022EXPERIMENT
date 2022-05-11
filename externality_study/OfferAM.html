@@ -1,0 +1,29 @@
+
+{{ block title }}
+{{if player.role == 'Bystander'}}
+What Would You Do?
+{{else}}
+{{endif}}
+{{ endblock }}
+{{ block content }}
+<script>
+    window.onload = function() {
+    document.title = "SCU2022";
+        }
+</script>
+{% if player.role == 'Buyer' %}
+<label
+  >As a Buyer, you do not participate in this stage. Please click Next.</label
+>
+<p>
+    {{if player.role == 'Bystander'}}
+  As the Bystander in this study, you do not make choices that affect the outcomes of participants.
+
+  <br><br>
+
+  {{endif}}
+
+  {% endif %} {{ formfields }} {{ next_button }}
+
+</p>
+{{ endblock }}

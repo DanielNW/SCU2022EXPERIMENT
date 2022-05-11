@@ -1,0 +1,14 @@
+{{ block title }}Role Assignment{{ endblock }}
+{{ block content }}
+<script>
+    window.onload = function () {
+        document.title = "SCU2022";
+    }
+</script>
+You have been assigned the role of {{player.role}} in this study. You will remain a {{player.role}} for the duration of this study. Please review the instructions that relate to your role before proceeding to the next screen. If you have any questions, please raise your hand and an experimenter will talk to you privately.
+
+<br/> <br/>
+
+
+<p>{{ next_button }} </p>
+{{ endblock }}

@@ -1,0 +1,39 @@
+
+{{ block title }}You have now completed the final round of the study.
+{{ endblock }}
+{{ block content }}
+<script>
+    window.onload = function() {
+    document.title = "SCU2022";
+        }
+</script>
+<br/>
+Round {{player.subsession.payround}} was chosen as the payment round. You earned {{Ppay}} points from the payment round. You have also earned {{Qpay}} points for answering {{Qpay}} comprehension questions correctly.
+<br/>
+<br/>
+Please click the link below to complete a brief survey. When you are finished with the survey, your participation in this study will be considered complete. Then you will receive instructions on how to receive your payment.
+<br/>
+
+
+<br/></br>
+
+
+<html>
+<head>
+</head>
+    <body>
+    <script>
+        var val = '{{player.participant.code}}';
+        var val2 = '{{player.finalpay}}';
+        var val3 = '{{seat}}';
+        var loc = "https://skidmore.qualtrics.com/jfe/form/SV_6FM4gZJy4AWw2kC?Participant="+val+"&TotalPay="+val2+"&Seat="+val3;
+        document.write('<a href="' + loc + '" target = "_blank">Begin Survey</a>');
+        </script>
+    </body>
+</html>
+
+
+
+{{ endblock }}
+
+
